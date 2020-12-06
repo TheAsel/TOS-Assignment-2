@@ -24,6 +24,7 @@ public class TakeAwayBillTest {
         test = new TakeAwayBillImpl();
     }
 
+
     @Test
     public void testPieno() {
         List<MenuItem> lista = new ArrayList<MenuItem>();
@@ -52,4 +53,61 @@ public class TakeAwayBillTest {
         }
     }
 
+
+	@Test
+    public void testSix() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Nafta",5));
+        lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",2));
+        lista.add(new MenuItem(ItemType.Gelati,"Vaniglia",3));
+        lista.add(new MenuItem(ItemType.Gelati,"Stracciatella",6));
+        lista.add(new MenuItem(ItemType.Gelati,"Fragola",4));
+        lista.add(new MenuItem(ItemType.Gelati,"Biscotto",4.5));
+
+        try {
+            assertEquals(23.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+        } catch (RestaurantBillException e) {
+            fail("Failed testPieno");
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void testFivePlusOne() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Nafta",5));
+        lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",2));
+        lista.add(new MenuItem(ItemType.Gelati,"Vaniglia",3));
+        lista.add(new MenuItem(ItemType.Gelati,"Stracciatella",6));
+        lista.add(new MenuItem(ItemType.Gelati,"Fragola",4));
+        lista.add(new MenuItem(ItemType.Budini,"Biscotto",4.5));
+
+        try {
+            assertEquals(24.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+        } catch (RestaurantBillException e) {
+            fail("Failed testPieno");
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void testSixPlusOne() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Nafta",5));
+        lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",2));
+        lista.add(new MenuItem(ItemType.Gelati,"Vaniglia",3));
+        lista.add(new MenuItem(ItemType.Gelati,"Stracciatella",6));
+        lista.add(new MenuItem(ItemType.Gelati,"Fragola",4));
+        lista.add(new MenuItem(ItemType.Gelati,"Biscotto",4.5));
+        lista.add(new MenuItem(ItemType.Budini,"Nutella",8));
+
+        try {
+            assertEquals(31.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+        } catch (RestaurantBillException e) {
+            fail("Failed testPieno");
+            e.printStackTrace();
+        }
+    }
 }
