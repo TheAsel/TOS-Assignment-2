@@ -35,6 +35,20 @@ public class TakeAwayBillImpl implements TakeAwayBill{
         if (sconto) {
             sum =sum-(min/2);
         }
+        double prov = sum;
+        for (MenuItem menuItem : itemsOrdered) {
+
+            if (menuItem.getItemType() == ItemType.Bevande) {
+
+                prov -= menuItem.getPrice();
+
+            }
+
+        }
+
+        if (prov >50) {
+            return sum- (sum*0.1);
+        }
         return sum;
     }
 
