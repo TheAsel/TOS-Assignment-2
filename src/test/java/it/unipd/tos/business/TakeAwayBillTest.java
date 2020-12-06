@@ -192,4 +192,43 @@ public class TakeAwayBillTest {
             e.printStackTrace();
         }
 	}
+
+
+	@Test(expected = RestaurantBillException.class)
+    public void testException() throws RestaurantBillException{
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Budini,"1",15));
+        lista.add(new MenuItem(ItemType.Budini,"2",38));
+        lista.add(new MenuItem(ItemType.Budini,"3",5));
+        lista.add(new MenuItem(ItemType.Budini,"4",4));
+        lista.add(new MenuItem(ItemType.Budini,"5",4.3));
+        lista.add(new MenuItem(ItemType.Budini,"6",2));
+        lista.add(new MenuItem(ItemType.Budini,"7",1));
+        lista.add(new MenuItem(ItemType.Budini,"8",20.5));
+        lista.add(new MenuItem(ItemType.Budini,"9",31));
+        lista.add(new MenuItem(ItemType.Budini,"10",5));
+        lista.add(new MenuItem(ItemType.Budini,"11",10));
+        lista.add(new MenuItem(ItemType.Budini,"12",4.3));
+        lista.add(new MenuItem(ItemType.Budini,"13",7));
+        lista.add(new MenuItem(ItemType.Budini,"14",1));
+        lista.add(new MenuItem(ItemType.Budini,"15",16));
+        lista.add(new MenuItem(ItemType.Budini,"16",38));
+        lista.add(new MenuItem(ItemType.Budini,"17",5));
+        lista.add(new MenuItem(ItemType.Budini,"18",22));
+        lista.add(new MenuItem(ItemType.Budini,"19",7.2));
+        lista.add(new MenuItem(ItemType.Budini,"20",7));
+        lista.add(new MenuItem(ItemType.Budini,"21",1));
+        lista.add(new MenuItem(ItemType.Budini,"22",38));
+        lista.add(new MenuItem(ItemType.Budini,"23",6));
+        lista.add(new MenuItem(ItemType.Budini,"24",22));
+        lista.add(new MenuItem(ItemType.Budini,"25",4.3));
+        lista.add(new MenuItem(ItemType.Budini,"26",10));
+        lista.add(new MenuItem(ItemType.Budini,"27",14));
+        lista.add(new MenuItem(ItemType.Budini,"28",22));
+        lista.add(new MenuItem(ItemType.Budini,"29",31));
+        lista.add(new MenuItem(ItemType.Budini,"30",19));
+        lista.add(new MenuItem(ItemType.Budini,"31",23));
+
+        test.getOrderPrice(lista,new User("primo","Gigi","Rossi",LocalDate.now()));
+    }
 }
