@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class TakeAwayBillTest {
     @Before
     public void BeforeClass() {
         test = new TakeAwayBillImpl();
+        TakeAwayBillImpl.lotteryCounter = 10;
     }
 
 
@@ -34,7 +36,7 @@ public class TakeAwayBillTest {
 
 
         try {
-            assertEquals(13,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+            assertEquals(13,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
         } catch (RestaurantBillException e) {
             fail("Failed testPieno");
             e.printStackTrace();
@@ -46,7 +48,7 @@ public class TakeAwayBillTest {
     public void testVuoto() {
         List<MenuItem> emptyList = new ArrayList<MenuItem>();
         try {
-            assertEquals(0,test.getOrderPrice(emptyList, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+            assertEquals(0,test.getOrderPrice(emptyList, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
         } catch (RestaurantBillException e) {
             fail("Failed testVuoto");
             e.printStackTrace();
@@ -65,7 +67,7 @@ public class TakeAwayBillTest {
         lista.add(new MenuItem(ItemType.Gelati,"Biscotto",4.5));
 
         try {
-            assertEquals(23.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+            assertEquals(23.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
         } catch (RestaurantBillException e) {
             fail("Failed testSix");
             e.printStackTrace();
@@ -84,7 +86,7 @@ public class TakeAwayBillTest {
         lista.add(new MenuItem(ItemType.Budini,"Biscotto",4.5));
 
         try {
-            assertEquals(24.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+            assertEquals(24.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
         } catch (RestaurantBillException e) {
             fail("Failed testFivePlusOne");
             e.printStackTrace();
@@ -104,7 +106,7 @@ public class TakeAwayBillTest {
         lista.add(new MenuItem(ItemType.Budini,"Nutella",8));
 
         try {
-            assertEquals(31.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+            assertEquals(31.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
         } catch (RestaurantBillException e) {
             fail("Failed testSixPlusOne");
             e.printStackTrace();
@@ -124,7 +126,7 @@ public class TakeAwayBillTest {
         lista.add(new MenuItem(ItemType.Budini,"Big Nutella",15));
 
         try {
-            assertEquals(79.2,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+            assertEquals(79.2,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
         } catch (RestaurantBillException e) {
             fail("Failed testPrimoSconto10");
             e.printStackTrace();
@@ -144,7 +146,7 @@ public class TakeAwayBillTest {
         lista.add(new MenuItem(ItemType.Bevande,"Big Vino",22.5));
 
         try {
-            assertEquals(106.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+            assertEquals(106.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
         } catch (RestaurantBillException e) {
             fail("Failed testSecSconto10");
             e.printStackTrace();
@@ -164,7 +166,7 @@ public class TakeAwayBillTest {
         lista.add(new MenuItem(ItemType.Budini,"Big Biscotto",12.5));
 
         try {
-            assertEquals(92.25,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+            assertEquals(92.25,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
         } catch (RestaurantBillException e) {
             fail("Failed testTerSconto10");
             e.printStackTrace();
@@ -184,7 +186,7 @@ public class TakeAwayBillTest {
         lista.add(new MenuItem(ItemType.Budini,"Big Topolino",22));
 
         try {
-            assertEquals(121.95,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+            assertEquals(121.95,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
         } catch (RestaurantBillException e) {
             fail("Failed testQuarSconto10");
             e.printStackTrace();
@@ -227,7 +229,7 @@ public class TakeAwayBillTest {
         lista.add(new MenuItem(ItemType.Budini,"30",19));
         lista.add(new MenuItem(ItemType.Budini,"31",23));
 
-        test.getOrderPrice(lista,new User("primo","Gigi","Rossi",LocalDate.now()));
+        test.getOrderPrice(lista,new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0));
     }
 
 
@@ -239,7 +241,7 @@ public class TakeAwayBillTest {
         lista.add(new MenuItem(ItemType.Budini,"Biscotto",2));
 
         try {
-            assertEquals(6.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
+            assertEquals(6.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
         } catch (RestaurantBillException e) {
             fail("Failed testPrimaCommissione");
             e.printStackTrace();
@@ -256,8 +258,9 @@ public class TakeAwayBillTest {
         lista.add(new MenuItem(ItemType.Budini,"Mini Biscotto",3));
         lista.add(new MenuItem(ItemType.Budini,"Mini Biancaneve",1));     
         try {
-            assertEquals(10,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
-        } catch (RestaurantBillException e) {
+            assertEquals(10,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
+        }
+        catch (RestaurantBillException e) {
             fail("Failed testSecCommissione");
             e.printStackTrace();
         }
@@ -265,42 +268,229 @@ public class TakeAwayBillTest {
     }
 
 
+    @Test 
+    public void testThirdCommissione() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Cioccolato",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Nafta",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Vaniglia",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Fragola",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Stracciatella",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Banana",5));
+
+        try {
+            assertEquals(10,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
+        }
+        catch (RestaurantBillException e) {
+            fail("Failed testThirdCommissione");
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @Test
+    public void testQuarCommissione() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Cioccolato",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Nafta",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Vaniglia",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Fragola",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Stracciatella",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Mini Banana",6));
+
+        try {
+            assertEquals(10.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(20,0,0)),0);
+        }
+        catch (RestaurantBillException e) {
+            fail("Failed testQuarCommissione");
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @Test 
+    public void testFirstRandomUnder() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Nafta",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Vaniglia",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Fragola",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Stracciatella",1));
+        lista.add(new MenuItem(ItemType.Budini,"Banana",5));
+        double x = 0;
+        for (int i = 0;i<100;++i) {          
+            try {
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(18,0,0));
+            }
+		    catch (RestaurantBillException e) {
+			    fail("Failed testFirstRandomUnder");
+                e.printStackTrace();
+            }
+        }   
+        assertEquals(1000,x,0);    
+    }
+
+
    @Test 
-   public void testThirdCommissione() {
+   public void testSecondRandomUnder() {
        List<MenuItem> lista = new ArrayList<MenuItem>();
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Cioccolato",1));
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Nafta",1));
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Vaniglia",1));
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Fragola",1));
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Stracciatella",1));
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Banana",5));
+       lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",1));
+       lista.add(new MenuItem(ItemType.Gelati,"Nafta",1));
+       lista.add(new MenuItem(ItemType.Gelati,"Vaniglia",1));
+       lista.add(new MenuItem(ItemType.Gelati,"Fragola",1));
+       lista.add(new MenuItem(ItemType.Gelati,"Stracciatella",1));
+       lista.add(new MenuItem(ItemType.Budini,"Banana",5));
+       double x = 0;
+       for (int i = 0;i<100;++i) {          
+           try {
+               x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(17,59,59));
+            }
+            catch (RestaurantBillException e) {
+			    fail("Failed testSecondRandomUnder");
+                e.printStackTrace();
+            }
+        }
+        assertEquals(1000,x,0);    
+    }
 
-       try {
-           assertEquals(10,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
-       } catch (RestaurantBillException e) {
-           fail("Failed testThirdCommissione");
-           e.printStackTrace();
-       }
 
-   }
+    @Test 
+    public void testTerRandomUnder() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Nafta",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Vaniglia",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Fragola",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Stracciatella",1));
+        lista.add(new MenuItem(ItemType.Budini,"Banana",5));
+        double x = 0;
+        for (int i = 0;i<100;++i) {          
+            try {
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(19,0,1));
+            }
+            catch (RestaurantBillException e) {
+			    fail("Failed testTerRandomUnder");
+                e.printStackTrace();
+            }
+        }
+        assertEquals(1000,x,0);    
+    }
 
 
-   @Test
-   public void testQuarCommissione() {
+    @Test 
+    public void testQuarRandomUnder() {
        List<MenuItem> lista = new ArrayList<MenuItem>();
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Cioccolato",1));
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Nafta",1));
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Vaniglia",1));
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Fragola",1));
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Stracciatella",1));
-       lista.add(new MenuItem(ItemType.Gelati,"Mini Banana",6));
+       lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",1));
+       lista.add(new MenuItem(ItemType.Gelati,"Nafta",1));
+       lista.add(new MenuItem(ItemType.Gelati,"Vaniglia",1));
+       lista.add(new MenuItem(ItemType.Gelati,"Fragola",1));
+       lista.add(new MenuItem(ItemType.Gelati,"Stracciatella",1));
+       lista.add(new MenuItem(ItemType.Budini,"Banana",5));
+       double x = 0;
+       for (int i = 0;i<100;++i) {          
+           try {
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(19,0,0));
+            }
+            catch (RestaurantBillException e) {
+			    fail("Failed testQuarRandomUnder");
+                e.printStackTrace();
+            }
+       }   
+       assertEquals(1000,x,0);    
+    }
 
-       try {
-           assertEquals(10.5,test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now())),0);
-       } catch (RestaurantBillException e) {
-           fail("Failed testQuarCommissione");
-           e.printStackTrace();
-       }
 
-   }
+    @Test
+    public void testRandomOver() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Nafta",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Vaniglia",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Fragola",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Stracciatella",1));
+        lista.add(new MenuItem(ItemType.Budini,"Banana",5));
+        double x = 0;
+        for (int i = 0;i<100;++i) {          
+            try {
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(18,3,0));
+            }
+            catch (RestaurantBillException e) {
+			    fail("Failed testRandomOver");
+                e.printStackTrace();
+            }
+       }   
+       assertEquals(1000,x,0);    
+    }
+
+
+    @Test
+    public void testSixPlusRandom() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Nafta",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Vaniglia",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Fragola",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Stracciatella",1));
+        lista.add(new MenuItem(ItemType.Gelati,"Biscotto",3));
+	 
+        double x = 0;
+        for (int i = 0;i<100;++i) {          
+            try {
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(18,3,0));
+            }
+			catch (RestaurantBillException e) {
+			    fail("Failed testSixPlusRandom");
+                e.printStackTrace();
+            }
+        }
+        assertEquals(800,x,0);  
+    }
+
+
+    @Test
+    public void testCommissionePlusRandom() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",2));
+        lista.add(new MenuItem(ItemType.Bevande,"Cola",2));
+        lista.add(new MenuItem(ItemType.Budini,"Biscotto",2));
+   
+        double x = 0;
+        for (int i = 0;i<100;++i) {          
+            try {
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(18,3,0));
+            }
+            catch (RestaurantBillException e) {
+			    fail("Failed testCommissionePlusRandom");
+                e.printStackTrace();
+            }
+        }
+        assertEquals(650,x,0);
+    }
+
+
+    @Test
+    public void testSconto10PlusRandom() {
+        List<MenuItem> lista = new ArrayList<MenuItem>();
+        lista.add(new MenuItem(ItemType.Gelati,"Cioccolato",20));
+        lista.add(new MenuItem(ItemType.Gelati,"Nafta",38));
+        lista.add(new MenuItem(ItemType.Gelati,"Vaniglia",5));
+        lista.add(new MenuItem(ItemType.Gelati,"Fragola",22));
+        lista.add(new MenuItem(ItemType.Gelati,"Stracciatella",4));
+        lista.add(new MenuItem(ItemType.Gelati,"Biscotto",7));
+        lista.add(new MenuItem(ItemType.Budini,"Pinguino",1));
+    
+        double x = 0;
+        for (int i = 0;i<100;++i) {          
+            try {
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(18,3,0));
+            }
+            catch (RestaurantBillException e) {
+			    fail("Failed testSconto10PlusRandom");
+                e.printStackTrace();
+            }
+        }
+        assertEquals(8550,x,0);    
+    }
 }
