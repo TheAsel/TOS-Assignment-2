@@ -322,14 +322,14 @@ public class TakeAwayBillTest {
         double x = 0;
         for (int i = 0;i<100;++i) {          
             try {
-                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(18,0,0));
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now()),LocalTime.of(18,0,0));
             }
 		    catch (RestaurantBillException e) {
 			    fail("Failed testFirstRandomUnder");
                 e.printStackTrace();
             }
         }   
-        assertEquals(1000,x,0);    
+        assertEquals(900,x,0);    
     }
 
 
@@ -345,7 +345,7 @@ public class TakeAwayBillTest {
        double x = 0;
        for (int i = 0;i<100;++i) {          
            try {
-               x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(17,59,59));
+               x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now()),LocalTime.of(17,59,59));
             }
             catch (RestaurantBillException e) {
 			    fail("Failed testSecondRandomUnder");
@@ -368,7 +368,7 @@ public class TakeAwayBillTest {
         double x = 0;
         for (int i = 0;i<100;++i) {          
             try {
-                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(19,0,1));
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now()),LocalTime.of(19,0,1));
             }
             catch (RestaurantBillException e) {
 			    fail("Failed testTerRandomUnder");
@@ -391,14 +391,14 @@ public class TakeAwayBillTest {
        double x = 0;
        for (int i = 0;i<100;++i) {          
            try {
-                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(19,0,0));
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now()),LocalTime.of(19,0,0));
             }
             catch (RestaurantBillException e) {
 			    fail("Failed testQuarRandomUnder");
                 e.printStackTrace();
             }
        }   
-       assertEquals(1000,x,0);    
+       assertEquals(900,x,0);    
     }
 
 
@@ -438,14 +438,14 @@ public class TakeAwayBillTest {
         double x = 0;
         for (int i = 0;i<100;++i) {          
             try {
-                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(18,3,0));
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now()),LocalTime.of(18,3,0));
             }
 			catch (RestaurantBillException e) {
 			    fail("Failed testSixPlusRandom");
                 e.printStackTrace();
             }
         }
-        assertEquals(800,x,0);  
+        assertEquals(720,x,0);  
     }
 
 
@@ -459,14 +459,14 @@ public class TakeAwayBillTest {
         double x = 0;
         for (int i = 0;i<100;++i) {          
             try {
-                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(18,3,0));
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now()),LocalTime.of(18,3,0));
             }
             catch (RestaurantBillException e) {
 			    fail("Failed testCommissionePlusRandom");
                 e.printStackTrace();
             }
         }
-        assertEquals(650,x,0);
+        assertEquals(585,x,0);
     }
 
 
@@ -484,13 +484,13 @@ public class TakeAwayBillTest {
         double x = 0;
         for (int i = 0;i<100;++i) {          
             try {
-                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.of(2000,1,1)),LocalTime.of(18,3,0));
+                x+=test.getOrderPrice(lista, new User("primo","Gigi","Rossi",LocalDate.now()),LocalTime.of(18,3,0));
             }
             catch (RestaurantBillException e) {
 			    fail("Failed testSconto10PlusRandom");
                 e.printStackTrace();
             }
         }
-        assertEquals(8550,x,0);    
+        assertEquals(7695,x,0);    
     }
 }
